@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urn:AuthnSelectionConfig lastModifiedMillis="1592906414696" enableAuthnSelection="true" enableSpAuthnSelection="false" failIfNoSelection="true" xmlns:urn="urn:pingidentity.com:pf:authn-selection">
+    <urn:AuthnSelectionTrees>
+        <urn:AuthnSelectionTree treeName="Global Policy" disabled="false" authnApiApp="">
+            <urn:AstRoot context="">
+                <urn:AstAction xsi:type="urn:AuthnSourceActionType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <urn:AuthnSourceKey type="ADAPTER">IDFirst</urn:AuthnSourceKey>
+                    <urn:fallbackToSuccess>true</urn:fallbackToSuccess>
+                    <urn:attributeRule>
+                        <urn:IncomingAttr>domain</urn:IncomingAttr>
+                        <urn:Operand>EQUALS_CASE_INSENSITIVE</urn:Operand>
+                        <urn:ExpectedValue>domaina.com</urn:ExpectedValue>
+                        <urn:Result>Domain A</urn:Result>
+                    </urn:attributeRule>
+                    <urn:attributeRule>
+                        <urn:IncomingAttr>domain</urn:IncomingAttr>
+                        <urn:Operand>EQUALS_CASE_INSENSITIVE</urn:Operand>
+                        <urn:ExpectedValue>domainb.com</urn:ExpectedValue>
+                        <urn:Result>Domain B</urn:Result>
+                    </urn:attributeRule>
+                </urn:AstAction>
+                <urn:AstChild context="Fail">
+                    <urn:AstAction noOpType="DONE" xsi:type="urn:NoOpActionType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                </urn:AstChild>
+                <urn:AstChild context="Domain A">
+                    <urn:AstAction apcId="z7NIWHg0IS6ZDrUc" xsi:type="urn:ApcMappingActionType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <urn:AttributeMapping>
+                            <urn1:AttributeMap Name="subject" Type="Adapter" AttributeSourceId="IDFirst" Value="subject" xmlns:urn1="urn:sourceid.org:saml2:metadata-extension:v2"/>
+                            <urn1:TokenAuthorizationIssuanceCriteria xmlns:urn1="urn:sourceid.org:saml2:metadata-extension:v2"/>
+                        </urn:AttributeMapping>
+                    </urn:AstAction>
+                </urn:AstChild>
+                <urn:AstChild context="Domain B">
+                    <urn:AstAction apcId="z7NIWHg0IS6ZDrUc" xsi:type="urn:ApcMappingActionType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <urn:AttributeMapping>
+                            <urn1:AttributeMap Name="subject" Type="Adapter" AttributeSourceId="IDFirst" Value="subject" xmlns:urn1="urn:sourceid.org:saml2:metadata-extension:v2"/>
+                            <urn1:TokenAuthorizationIssuanceCriteria xmlns:urn1="urn:sourceid.org:saml2:metadata-extension:v2"/>
+                        </urn:AttributeMapping>
+                    </urn:AstAction>
+                </urn:AstChild>
+                <urn:AstChild context="Success">
+                    <urn:AstAction noOpType="DONE" xsi:type="urn:NoOpActionType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                </urn:AstChild>
+            </urn:AstRoot>
+        </urn:AuthnSelectionTree>
+    </urn:AuthnSelectionTrees>
+    <urn:DefaultAuthnSources/>
+</urn:AuthnSelectionConfig>
